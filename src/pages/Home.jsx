@@ -27,283 +27,111 @@ export default function Home() {
 
   return (
     <div>
-      <section
-        style={{
-          minHeight: "100vh",
-          display: "flex",
-          alignItems: "center",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            opacity: 0.03,
-            pointerEvents: "none",
-            backgroundImage:
-              "linear-gradient(var(--text) 1px, transparent 1px), linear-gradient(90deg, var(--text) 1px, transparent 1px)",
-            backgroundSize: "60px 60px",
-          }}
-        />
+      <section className="min-h-screen flex items-center relative overflow-hidden">
 
-        <div
-          style={{
-            position: "absolute",
-            top: "20%",
-            right: 0,
-            width: 500,
-            height: 500,
-            borderRadius: "50%",
-            background: "var(--accent)",
-            opacity: 0.07,
-            filter: "blur(100px)",
-            pointerEvents: "none",
-          }}
-        />
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none 
+          bg-[linear-gradient(var(--text)_1px,transparent_1px),linear-gradient(90deg,var(--text)_1px,transparent_1px)] 
+          bg-size-[60px_60px]" />
 
-        <div
-          style={{
-            maxWidth: 1152,
-            margin: "0 auto",
-            padding: "80px 20px 60px",
-            width: "100%",
-          }}
-        >
-          <div
-            className="hero-grid"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr auto",
-              gap: 48,
-              alignItems: "center",
-            }}
-          >
-            {/* LEFT — Text */}
+        <div className="absolute top-[20%] right-0 w-100 h-100 md:w-125 md:h-125 rounded-full bg-(--accent) opacity-[0.07] blur-[100px]" />
+
+        <div className="max-w-6xl mx-auto px-5 py-20 w-full">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+
             <div>
-              {/* Badge */}
-              <div
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 8,
-                  padding: "6px 14px",
-                  borderRadius: 999,
-                  background: "var(--card)",
-                  border: "1px solid var(--border)",
-                  fontSize: 12,
-                  fontWeight: 500,
-                  color: "var(--muted)",
-                  marginBottom: 32,
-                  fontFamily: "'JetBrains Mono', monospace",
-                }}
-              >
-                <Sparkles size={12} style={{ color: "var(--accent)" }} />
+
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-(--card) border border-(--border) text-xs text-(--muted) mb-8 font-['JetBrains_Mono']">
+                <Sparkles size={12} className="text-(--accent)" />
                 Available for new opportunities
               </div>
 
-              <h1
-                style={{
-                  fontFamily: "'Bebas Neue', sans-serif",
-                  fontSize: "clamp(3.5rem, 10vw, 7rem)",
-                  lineHeight: 0.95,
-                  color: "var(--text)",
-                  marginBottom: 20,
-                }}
-              >
+              {/* Name */}
+              <h1 className="font-['Bebas_Neue'] text-[clamp(3.5rem,10vw,7rem)] leading-[0.95] text-(--text) mb-5">
                 {firstName}
                 <br />
-                <span style={{ color: "var(--accent)" }}>{lastName}</span>
+                <span className="text-(--accent)">{lastName}</span>
               </h1>
 
-              <div style={{ height: 40, marginBottom: 24, overflow: "hidden" }}>
+              {/* Role animation */}
+              <div className="h-10 mb-6 overflow-hidden">
                 <p
-                  style={{
-                    fontFamily: "'JetBrains Mono', monospace",
-                    fontSize: "clamp(0.85rem, 2vw, 1rem)",
-                    color: "var(--accent)",
-                    opacity: visible ? 1 : 0,
-                    transform: visible ? "translateY(0)" : "translateY(8px)",
-                    transition: "opacity 0.3s, transform 0.3s",
-                  }}
+                  className={`font-['JetBrains_Mono'] text-sm md:text-base text-(--accent) transition-all duration-300 ${
+                    visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
+                  }`}
                 >
                   {"< "}{roles[roleIdx]}{" />"}
                 </p>
               </div>
 
-              <p
-                style={{
-                  fontSize: 16,
-                  color: "var(--muted)",
-                  lineHeight: 1.8,
-                  maxWidth: 520,
-                  marginBottom: 24,
-                }}
-              >
+              {/* Tagline */}
+              <p className="text-base text-(--muted) leading-[1.8] max-w-130 mb-6">
                 {personal.tagline}
               </p>
 
               {/* Location */}
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 6,
-                  fontSize: 14,
-                  color: "var(--muted)",
-                  marginBottom: 36,
-                }}
-              >
-                <MapPin size={14} style={{ color: "var(--accent)" }} />
+              <div className="flex items-center gap-2 text-sm text-(--muted) mb-8">
+                <MapPin size={14} className="text-(--accent)" />
                 {personal.location}
               </div>
 
-              {/* CTA Buttons */}
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+              {/* Buttons */}
+              <div className="flex flex-wrap gap-3">
                 <Link
                   to="/projects"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 8,
-                    padding: "12px 24px",
-                    borderRadius: 12,
-                    background: "var(--accent)",
-                    color: "#0b0b10",
-                    textDecoration: "none",
-                    fontSize: 14,
-                    fontWeight: 600,
-                  }}
+                  className="flex items-center gap-2 px-6 py-3 rounded-xl bg-(--accent) text-[#0b0b10] font-semibold text-sm"
                 >
                   View Projects <ArrowRight size={16} />
                 </Link>
 
-                {/* ✅ FIXED ONLY THIS */}
                 <a
                   href={personal.links.resume}
                   download
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 8,
-                    padding: "12px 24px",
-                    borderRadius: 12,
-                    background: "var(--card)",
-                    color: "var(--text)",
-                    border: "1px solid var(--border)",
-                    textDecoration: "none",
-                    fontSize: 14,
-                    fontWeight: 600,
-                  }}
+                  className="flex items-center gap-2 px-6 py-3 rounded-xl bg-(--card) border border-(--border) text-(--text) font-semibold text-sm"
                 >
                   <Download size={16} /> Resume
                 </a>
               </div>
             </div>
 
-            {/* RIGHT — Avatar */}
-            <div className="hero-avatar" style={{ position: "relative" }}>
-              <div
-                style={{
-                  width: 280,
-                  height: 280,
-                  borderRadius: 32,
-                  background: "var(--card)",
-                  border: "1px solid var(--border)",
-                  overflow: "hidden",
-                }}
-              >
+            {/* RIGHT AVATAR */}
+            <div className="relative flex justify-center md:justify-end">
+              <div className="w-55 h-55 md:w-70 md:h-70 rounded-4xl bg-(--card) border border-(--border) overflow-hidden">
                 <img
                   src={personal.avatar}
                   alt={personal.name}
-                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                  className="w-full h-full object-cover"
                 />
               </div>
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: -12,
-                  right: -12,
-                  background: "var(--accent)",
-                  color: "#0b0b10",
-                  padding: "8px 14px",
-                  borderRadius: 12,
-                  fontSize: 12,
-                  fontWeight: 700,
-                  fontFamily: "'JetBrains Mono', monospace",
-                }}
-              >
+
+              <div className="absolute -bottom-2.5 -right-2.5 bg-(--accent) text-[#0b0b10] px-4 py-2 rounded-xl text-xs font-bold font-['JetBrains_Mono']">
                 {new Date().getFullYear() - 2021}+ yrs exp
               </div>
             </div>
+
           </div>
         </div>
       </section>
 
-      {/* ======== FEATURED PROJECTS SECTION ======== */}
-      <section style={{ paddingBottom: 100 }}>
-        <div style={{ maxWidth: 1152, margin: "0 auto", padding: "0 20px" }}>
+      {/* FEATURED PROJECTS */}
+      <section className="pb-24">
+        <div className="max-w-6xl mx-auto px-5">
 
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "flex-end",
-              marginBottom: 40,
-              flexWrap: "wrap",
-              gap: 12,
-            }}
-          >
+          <div className="flex flex-wrap justify-between items-end mb-10 gap-3">
             <div>
-              <p
-                style={{
-                  fontSize: 11,
-                  fontWeight: 600,
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase",
-                  color: "var(--accent)",
-                  fontFamily: "'JetBrains Mono', monospace",
-                  marginBottom: 8,
-                }}
-              >
+              <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-(--accent) font-['JetBrains_Mono'] mb-2">
                 Featured Work
               </p>
-              <h2
-                style={{
-                  fontFamily: "'Bebas Neue', sans-serif",
-                  fontSize: "clamp(2rem, 5vw, 3.5rem)",
-                  color: "var(--text)",
-                  lineHeight: 1,
-                }}
-              >
+              <h2 className="font-['Bebas_Neue'] text-[clamp(2rem,5vw,3.5rem)] text-(--text)">
                 Selected Projects
               </h2>
             </div>
 
-            <Link
-              to="/projects"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 6,
-                fontSize: 14,
-                color: "var(--accent)",
-                textDecoration: "none",
-                fontWeight: 500,
-              }}
-            >
+            <Link to="/projects" className="flex items-center gap-1 text-sm text-(--accent)">
               View All <ArrowRight size={14} />
             </Link>
           </div>
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(290px, 1fr))",
-              gap: 24,
-            }}
-          >
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-6">
             {featured.map((p) => (
               <FeaturedCard key={p.id} project={p} />
             ))}
@@ -311,85 +139,36 @@ export default function Home() {
 
         </div>
       </section>
-
     </div>
   );
 }
 
 function FeaturedCard({ project }) {
   return (
-    <div
-      style={{
-        background: "var(--card)",
-        border: "1px solid var(--border)",
-        borderRadius: 20,
-        padding: 28,
-        display: "flex",
-        flexDirection: "column",
-        gap: 12,
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <span
-          style={{
-            fontSize: 11,
-            fontFamily: "'JetBrains Mono', monospace",
-            color: "var(--accent)",
-            background: "var(--bg2)",
-            padding: "3px 10px",
-            borderRadius: 6,
-          }}
-        >
+    <div className="bg-(--card) border border-(--border) rounded-[20px] p-6 flex flex-col gap-3">
+      <div className="flex justify-between items-center">
+        <span className="text-[11px] font-['JetBrains_Mono'] text-(--accent) bg-(--bg2) px-2.5 py-0.5 rounded-md">
           {project.year}
         </span>
-        <span
-          style={{
-            fontSize: 10,
-            fontWeight: 700,
-            background: "var(--accent)",
-            color: "#0b0b10",
-            padding: "2px 8px",
-            borderRadius: 6,
-          }}
-        >
+
+        <span className="text-[10px] font-bold bg-(--accent) text-[#0b0b10] px-2 py-0.5 rounded-md">
           Featured
         </span>
       </div>
 
-      <h3 style={{ fontSize: 18, fontWeight: 700, color: "var(--text)" }}>
+      <h3 className="text-[17px] font-bold text-(--text)">
         {project.title}
       </h3>
 
-      <p
-        style={{
-          fontSize: 14,
-          color: "var(--muted)",
-          lineHeight: 1.7,
-          flex: 1,
-        }}
-      >
+      <p className="text-sm text-(--muted) leading-[1.7] flex-1">
         {project.desc}
       </p>
 
-      <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+      <div className="flex flex-wrap gap-2">
         {project.tags.map((tag) => (
           <span
             key={tag}
-            style={{
-              fontSize: 11,
-              fontFamily: "'JetBrains Mono', monospace",
-              color: "var(--muted)",
-              background: "var(--bg2)",
-              border: "1px solid var(--border)",
-              padding: "3px 10px",
-              borderRadius: 6,
-            }}
+            className="text-[11px] font-['JetBrains_Mono'] text-(--muted) bg-(--bg2) border border-(--border) px-2.5 py-0.5 rounded-md"
           >
             {tag}
           </span>

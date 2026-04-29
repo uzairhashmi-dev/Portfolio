@@ -6,7 +6,7 @@ export const personal = {
   location: "Okara, Pakistan",
   email: "uzairhashmi7852@gmail.com",
   phone: "+92 3297563190",
-  avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+  avatar: "https://ik.imagekit.io/dvxlmsomt/PORTFOLIO.jpeg",
   links: {
     github: "https://github.com/",
     linkedin: "https://linkedin.com/in/",

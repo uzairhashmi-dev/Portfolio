@@ -9,134 +9,61 @@ export default function About() {
   ];
 
   return (
-    <div style={{ paddingTop: 100, paddingBottom: 100 }}>
-      <div style={{ maxWidth: 1152, margin: "0 auto", padding: "0 20px" }}>
+    <div className="pt-24 pb-24">
+      <div className="max-w-6xl mx-auto px-5">
 
-        {/* Page heading */}
-        <p
-          style={{
-            fontSize: 11,
-            fontWeight: 600,
-            letterSpacing: "0.18em",
-            textTransform: "uppercase",
-            color: "var(--accent)",
-            fontFamily: "'JetBrains Mono', monospace",
-            marginBottom: 8,
-          }}
-        >
+        {/* Heading */}
+        <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-(--accent) font-['JetBrains_Mono'] mb-2">
           About Me
         </p>
 
-        <h2
-          style={{
-            fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: "clamp(2.8rem, 8vw, 5rem)",
-            color: "var(--text)",
-            lineHeight: 1,
-            marginBottom: 16,
-          }}
-        >
+        <h2 className="font-['Bebas_Neue'] text-[clamp(2.8rem,8vw,5rem)] text-(--text) leading-none mb-4">
           Who I Am
         </h2>
 
-        <p
-          style={{
-            fontSize: 16,
-            color: "var(--muted)",
-            marginBottom: 64,
-            maxWidth: 560,
-          }}
-        >
+        <p className="text-base text-(--muted) mb-16 max-w-140">
           A frontend developer who cares about craft, performance, and the
           humans using the product.
         </p>
 
-        {/* Main grid */}
-        <div
-          className="about-grid"
-          style={{ display: "grid", gridTemplateColumns: "3fr 2fr", gap: 40 }}
-        >
+        {/* Grid */}
+        <div className="grid md:grid-cols-[3fr_2fr] gap-10">
 
-          {/* ---- LEFT COLUMN ---- */}
-          <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+          {/* LEFT */}
+          <div className="flex flex-col gap-6">
 
-            {/* Bio card */}
-            <div
-              style={{
-                background: "var(--card)",
-                border: "1px solid var(--border)",
-                borderRadius: 20,
-                padding: 32,
-              }}
-            >
-              <p style={{ fontSize: 16, color: "var(--muted)", lineHeight: 1.85 }}>
+            {/* Bio */}
+            <div className="bg-(--card) border border-(--border) rounded-[20px] p-8">
+              <p className="text-base text-(--muted) leading-[1.85]">
                 {personal.bio}
               </p>
             </div>
 
-            {/* Contact info cards */}
-            <div
-              style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}
-            >
+            {/* Contact */}
+            <div className="grid sm:grid-cols-2 gap-3.5">
               {contactItems.map((item) => (
                 <div
                   key={item.label}
-                  style={{
-                    background: "var(--card)",
-                    border: "1px solid var(--border)",
-                    borderRadius: 16,
-                    padding: "16px 18px",
-                    display: "flex",
-                    gap: 14,
-                    alignItems: "flex-start",
-                  }}
+                  className="bg-(--card) border border-(--border) rounded-2xl px-4 py-4 flex gap-3.5"
                 >
-                  <div
-                    style={{
-                      width: 36,
-                      height: 36,
-                      borderRadius: 10,
-                      background: "var(--bg2)",
-                      border: "1px solid var(--border)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      color: "var(--accent)",
-                      flexShrink: 0,
-                    }}
-                  >
+                  <div className="w-9 h-9 rounded-[10px] bg-(--bg2) border border-(--border) flex items-center justify-center text-(--accent) shrink-0">
                     <item.icon size={15} />
                   </div>
 
-                  <div style={{ minWidth: 0 }}>
-                    <p
-                      style={{
-                        fontSize: 10,
-                        fontFamily: "'JetBrains Mono', monospace",
-                        color: "var(--muted)",
-                        fontWeight: 600,
-                        letterSpacing: "0.1em",
-                        textTransform: "uppercase",
-                        marginBottom: 4,
-                      }}
-                    >
+                  <div className="min-w-0">
+                    <p className="text-[10px] font-['JetBrains_Mono'] text-(--muted) font-semibold tracking-widest uppercase mb-1">
                       {item.label}
                     </p>
 
                     {item.href ? (
                       <a
                         href={item.href}
-                        style={{
-                          fontSize: 13,
-                          color: "var(--text)",
-                          textDecoration: "none",
-                          wordBreak: "break-word",
-                        }}
+                        className="text-[13px] text-(--text) wrap-break-word no-underline"
                       >
                         {item.value}
                       </a>
                     ) : (
-                      <p style={{ fontSize: 13, color: "var(--text)" }}>
+                      <p className="text-[13px] text-(--text)">
                         {item.value}
                       </p>
                     )}
@@ -144,117 +71,48 @@ export default function About() {
                 </div>
               ))}
 
-              {/* Resume button — full width */}
-              <div style={{ gridColumn: "1 / -1" }}>
+              {/* Resume */}
+              <div className="col-span-full">
                 <a
                   href={personal.links.resume}
                   download
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 8,
-                    padding: "12px 24px",
-                    borderRadius: 12,
-                    background: "var(--accent)",
-                    color: "#0b0b10",
-                    textDecoration: "none",
-                    fontSize: 14,
-                    fontWeight: 600,
-                  }}
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-(--accent) text-[#0b0b10] text-sm font-semibold"
                 >
                   <Download size={15} /> Download Resume
                 </a>
               </div>
             </div>
           </div>
-          {/* ---- END LEFT COLUMN ---- */}
 
-          {/* ---- RIGHT COLUMN ---- */}
-          <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+          {/* RIGHT */}
+          <div className="flex flex-col gap-5">
 
-            {/* Experience card */}
-            <div
-              style={{
-                background: "var(--card)",
-                border: "1px solid var(--border)",
-                borderRadius: 20,
-                padding: 28,
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 10,
-                  marginBottom: 24,
-                }}
-              >
-                <div
-                  style={{
-                    width: 32,
-                    height: 32,
-                    borderRadius: 8,
-                    background: "var(--bg2)",
-                    border: "1px solid var(--border)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: "var(--accent)",
-                  }}
-                >
+            {/* Experience */}
+            <div className="bg-(--card) border border-(--border) rounded-[20px] p-7">
+              <div className="flex items-center gap-2.5 mb-6">
+                <div className="w-8 h-8 rounded-lg bg-(--bg2) border border-(--border) flex items-center justify-center text-(--accent)">
                   <Briefcase size={14} />
                 </div>
-                <h3
-                  style={{
-                    fontFamily: "'Bebas Neue', sans-serif",
-                    fontSize: "1.5rem",
-                    color: "var(--text)",
-                    letterSpacing: "0.04em",
-                  }}
-                >
+                <h3 className="font-['Bebas_Neue'] text-2xl text-(--text) tracking-wide">
                   Experience
                 </h3>
               </div>
 
-              <div style={{ display: "flex", flexDirection: "column", gap: 22 }}>
+              <div className="flex flex-col gap-5">
                 {experience.map((exp, i) => (
-                  <div
-                    key={i}
-                    style={{ paddingLeft: 16, borderLeft: "2px solid var(--border)" }}
-                  >
-                    <p
-                      style={{
-                        fontSize: 11,
-                        fontFamily: "'JetBrains Mono', monospace",
-                        color: "var(--accent)",
-                        fontWeight: 600,
-                        marginBottom: 4,
-                      }}
-                    >
+                  <div key={i} className="pl-4 border-l-2 border-(--border)">
+                    <p className="text-[11px] font-['JetBrains_Mono'] text-(--accent) font-semibold mb-1">
                       {exp.period}
                     </p>
-                    <h4
-                      style={{
-                        fontSize: 14,
-                        fontWeight: 700,
-                        color: "var(--text)",
-                        marginBottom: 2,
-                      }}
-                    >
+                    <h4 className="text-sm font-bold text-(--text)">
                       {exp.role}
                     </h4>
                     {exp.company && (
-                      <p
-                        style={{
-                          fontSize: 12,
-                          color: "var(--muted)",
-                          marginBottom: 6,
-                        }}
-                      >
+                      <p className="text-xs text-(--muted) mb-1.5">
                         {exp.company}
                       </p>
                     )}
-                    <p style={{ fontSize: 13, color: "var(--muted)", lineHeight: 1.6 }}>
+                    <p className="text-sm text-(--muted) leading-[1.6]">
                       {exp.desc}
                     </p>
                   </div>
@@ -262,82 +120,31 @@ export default function About() {
               </div>
             </div>
 
-            {/* Education card */}
-            <div
-              style={{
-                background: "var(--card)",
-                border: "1px solid var(--border)",
-                borderRadius: 20,
-                padding: 28,
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 10,
-                  marginBottom: 24,
-                }}
-              >
-                <div
-                  style={{
-                    width: 32,
-                    height: 32,
-                    borderRadius: 8,
-                    background: "var(--bg2)",
-                    border: "1px solid var(--border)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: "var(--accent)",
-                  }}
-                >
+            {/* Education */}
+            <div className="bg-(--card) border border-(--border) rounded-[20px] p-7">
+              <div className="flex items-center gap-2.5 mb-6">
+                <div className="w-8 h-8 rounded-lg bg-(--bg2) border border-(--border) flex items-center justify-center text-(--accent)">
                   <GraduationCap size={14} />
                 </div>
-                <h3
-                  style={{
-                    fontFamily: "'Bebas Neue', sans-serif",
-                    fontSize: "1.5rem",
-                    color: "var(--text)",
-                    letterSpacing: "0.04em",
-                  }}
-                >
+                <h3 className="font-['Bebas_Neue'] text-2xl text-(--text) tracking-wide">
                   Education
                 </h3>
               </div>
 
-              <div
-                style={{ paddingLeft: 16, borderLeft: "2px solid var(--border)" }}
-              >
-                <p
-                  style={{
-                    fontSize: 11,
-                    fontFamily: "'JetBrains Mono', monospace",
-                    color: "var(--accent)",
-                    fontWeight: 600,
-                    marginBottom: 4,
-                  }}
-                >
+              <div className="pl-4 border-l-2 border-(--border)">
+                <p className="text-[11px] font-['JetBrains_Mono'] text-(--accent) font-semibold mb-1">
                   2018 — 2022
                 </p>
-                <h4
-                  style={{
-                    fontSize: 14,
-                    fontWeight: 700,
-                    color: "var(--text)",
-                    marginBottom: 2,
-                  }}
-                >
+                <h4 className="text-sm font-bold text-(--text)">
                   B.Sc. Computer Science
                 </h4>
-                <p style={{ fontSize: 12, color: "var(--muted)" }}>
+                <p className="text-xs text-(--muted)">
                   University of Punjab, Lahore
                 </p>
               </div>
             </div>
 
           </div>
-          {/* ---- END RIGHT COLUMN ---- */}
 
         </div>
       </div>
