@@ -27,7 +27,7 @@ export default function Footer() {
                 Uzair<span className="text-[var(--accent)">.</span>
               </span>
             </NavLink>
-            <p className="text-(--muted)] text-sm max-w-5 leading-[1.7]">
+            <p className="text-(--muted)] text-sm max-w-40 leading-7">
               Frontend Developer building clean and fast web experiences.
             </p>
           </div>

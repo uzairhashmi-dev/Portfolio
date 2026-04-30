@@ -136,7 +136,7 @@ export default function About() {
                   2018 — 2022
                 </p>
                 <h4 className="text-sm font-bold text-(--text)">
-                  B.Sc. Computer Science
+                  B.com 
                 </h4>
                 <p className="text-xs text-(--muted)">
                   University of Punjab, Lahore

@@ -22,9 +22,9 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", background: "var(--bg)", color: "var(--text)" }}>
+      <div className="min-h-screen flex flex-col bg-[var(--bg)] text-[var(--text)]">
         <Navbar dark={dark} setDark={setDark} />
-        <main style={{ flex: 1 }}>
+        <main className="flex-1">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
