@@ -1,178 +1,285 @@
-import { useState } from "react";
-import { Mail, Phone, MapPin, Send, CheckCircle2 } from "lucide-react";
+import { useState, useRef } from "react";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Send,
+  CheckCircle2,
+  X,
+  MessageCircle,
+} from "lucide-react";
 import { personal } from "../data/data";
+import emailjs from "@emailjs/browser";
+
+const EMAILJS_SERVICE_ID = "service_k0hibdk";
+const EMAILJS_TEMPLATE_ID = "template_pee0xis";
+const EMAILJS_AUTOREPLY_ID = "template_9vxjubi";
+const EMAILJS_PUBLIC_KEY = "GMV643mk83te9zrUa";
+
+const WHATSAPP_NUMBER = "923297563190";
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
+  const formRef = useRef(null);
+
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
+  const [emailError, setEmailError] = useState("");
+  const [showPhoneModal, setShowPhoneModal] = useState(false);
 
   function setField(key, val) {
-    setForm(prev => ({ ...prev, [key]: val }));
+    setForm((prev) => ({ ...prev, [key]: val }));
+    if (errors[key]) setErrors((prev) => ({ ...prev, [key]: "" }));
   }
 
   function validate() {
     const e = {};
     if (!form.name.trim()) e.name = "Name is required";
     if (!form.email.trim()) e.email = "Email is required";
-    else if (!/\S+@\S+\.\S+/.test(form.email)) e.email = "Invalid email address";
+    else if (!/\S+@\S+\.\S+/.test(form.email))
+      e.email = "Invalid email address";
     if (!form.message.trim()) e.message = "Message is required";
     return e;
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    const errs = validate();
-    if (Object.keys(errs).length > 0) { setErrors(errs); return; }
-    setErrors({});
-    setLoading(true);
-    setTimeout(() => { setLoading(false); setSent(true); }, 1400);
+ async function handleSubmit(e) {
+  e.preventDefault();
+
+  if (loading) return; 
+
+  const errs = validate();
+  if (Object.keys(errs).length > 0) {
+    setErrors(errs);
+    return;
+  }
+
+  setErrors({});
+  setEmailError("");
+  setLoading(true);
+
+    const params = {
+      from_name: form.name,
+      from_email: form.email,
+      subject: form.subject || "No Subject",
+      message: form.message,
+      reply_to: form.email,
+    };
+
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        params,
+        EMAILJS_PUBLIC_KEY
+      );
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_AUTOREPLY_ID,
+        params,
+        EMAILJS_PUBLIC_KEY
+      );
+      setSent(true);
+    } catch (err) {
+      console.error(err);
+      setEmailError("Something went wrong. Try again.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   function handleReset() {
     setSent(false);
     setForm({ name: "", email: "", subject: "", message: "" });
     setErrors({});
+    setEmailError("");
   }
 
-  const contactItems = [
-    { icon: Mail, label: "Email", value: personal.email, href: "mailto:" + personal.email },
-    { icon: Phone, label: "Phone", value: personal.phone, href: "tel:" + personal.phone },
-    { icon: MapPin, label: "Location", value: personal.location, href: null },
-  ];
-
-  const inputClass = "w-full px-4 py-3 rounded-xl text-sm outline-none bg-[var(--bg2)] text-(--text) font-['DM_Sans'] transition-colors duration-200";
-  const labelClass = "block text-[11px] font-semibold text-[var(--muted)] font-['JetBrains_Mono'] tracking-[0.1em] uppercase mb-2";
-  const errorClass = "text-xs text-red-500 mt-1 font-['JetBrains_Mono']";
+  const whatsappUrl =
+    "https://wa.me/" +
+    WHATSAPP_NUMBER +
+    "?text=Hi%20Uzair%2C%20I%20found%20your%20portfolio!";
 
   return (
-    <div className="pt-25 pb-25">
-      <div className="max-w-6xl mx-auto px-5">
+    <div className="py-20 px-4">
+      {/* MODAL */}
+      {showPhoneModal && (
+        <div
+          onClick={() => setShowPhoneModal(false)}
+          className="fixed inset-0 bg-black/50 backdrop-blur flex items-center justify-center z-50 p-4"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="bg-(--card) border border-(--border) rounded-2xl p-6 w-full max-w-sm relative"
+          >
+            <button
+              onClick={() => setShowPhoneModal(false)}
+              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center border rounded-md"
+            >
+              <X size={16} />
+            </button>
 
-        <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-(--accent) font-['JetBrains_Mono'] mb-2">
+            <h3 className="text-2xl font-bold mb-4">Get in Touch</h3>
+            <p className="text-sm text-(--muted) mb-6">
+              {personal.phone}
+            </p>
+
+            <div className="flex flex-col gap-3">
+              <a
+                href={"tel:" + personal.phone}
+                className="flex items-center gap-3 bg-(--accent) text-black px-4 py-3 rounded-xl font-semibold"
+              >
+                <Phone size={18} /> Call Now
+              </a>
+
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-3 bg-green-500 text-white px-4 py-3 rounded-xl font-semibold"
+              >
+                <MessageCircle size={18} /> WhatsApp
+              </a>
+
+              <button
+                onClick={() => setShowPhoneModal(false)}
+                className="border rounded-xl py-2 text-sm"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className="max-w-6xl mx-auto">
+        <p className="text-xs tracking-widest text-(--accent) uppercase mb-2">
           Contact
         </p>
-        <h2 className="font-['Bebas_Neue'] text-[clamp(2.8rem,8vw,5rem)] text-(--text) leading-none mb-4">
-          Let's Talk
-        </h2>
-        <p className="text-base text-(--muted) mb-16 max-w-120">
+
+        <h2 className="text-5xl font-bold mb-4">Lets Talk</h2>
+
+        <p className="text-(--muted) mb-10 max-w-md">
           Have a project or just want to say hi? My inbox is always open.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-[2fr_3fr] gap-10">
-
-          {/* Contact items */}
-          <div className="flex flex-col gap-3.5">
-            {contactItems.map(item => (
-              <div
-                key={item.label}
-                className="flex gap-4 items-center bg-(--card) border border-(--border) rounded-2xl p-5"
-              >
-                <div className="w-11 h-11 rounded-xl bg-(--bg2) border border-(--border) flex items-center justify-center text-(--accent) shrink-0">
-                  <item.icon size={18} />
-                </div>
-                <div>
-                  <p className="text-[10px] font-['JetBrains_Mono'] text-(--muted) font-semibold tracking-widest uppercase mb-1">
-                    {item.label}
-                  </p>
-                  {item.href ? (
-                    <a href={item.href} className="text-sm text-(--text) no-underline">
-                      {item.value}
-                    </a>
-                  ) : (
-                    <p className="text-sm text-(--text)">{item.value}</p>
-                  )}
-                </div>
+        {/* GRID */}
+        <div className="grid lg:grid-cols-5 md:grid-cols-2 gap-10">
+          {/* LEFT */}
+          <div className="lg:col-span-2 flex flex-col gap-4">
+            <a
+              href={"mailto:" + personal.email}
+              className="flex items-center gap-4 border rounded-xl p-4"
+            >
+              <Mail />
+              <div>
+                <p className="text-xs text-(--muted)">Email</p>
+                <p>{personal.email}</p>
               </div>
-            ))}
+            </a>
+
+            {/* Phone */}
+            <button
+              onClick={() => setShowPhoneModal(true)}
+              className="flex items-center gap-4 border rounded-xl p-4 text-left"
+            >
+              <Phone />
+              <div>
+                <p className="text-xs text-(--muted)">Phone</p>
+                <p>{personal.phone}</p>
+              </div>
+            </button>
+
+            <div className="flex items-center gap-4 border rounded-xl p-4">
+              <MapPin />
+              <div>
+                <p className="text-xs text-(--muted)">Location</p>
+                <p>{personal.location}</p>
+              </div>
+            </div>
+
+            {/* WhatsApp */}
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-3 border border-green-400 text-green-500 px-4 py-3 rounded-xl"
+            >
+              <MessageCircle /> Chat on WhatsApp
+            </a>
           </div>
 
-          {/* Form */}
-          <div className="bg-(--card) border border-(--border) rounded-[20px] p-8">
+          {/* RIGHT FORM */}
+          <div className="lg:col-span-3 border rounded-2xl p-6">
             {sent ? (
-              <div className="text-center py-10 px-5">
-                <CheckCircle2 size={52} className="text-(--accent) mx-auto mb-4 block" />
-                <h3 className="font-['Bebas_Neue'] text-[2rem] text-(--text) mb-2">
-                  Message Sent!
-                </h3>
-                <p className="text-(--muted) text-sm mb-6">
-                  Thanks for reaching out. I'll get back to you soon.
+              <div className="text-center py-10">
+                <CheckCircle2 className="mx-auto mb-4 text-green-500" size={50} />
+                <h3 className="text-2xl font-bold mb-2">Message Sent!</h3>
+                <p className="text-sm text-(--muted) mb-4">
+                  Thanks {form.name}
                 </p>
+
                 <button
                   onClick={handleReset}
-                  className="px-6 py-2.5 rounded-[10px] bg-(--accent) text-[#0b0b10] border-none text-sm font-semibold cursor-pointer"
+                  className="bg-(--accent) px-6 py-2 rounded-lg"
                 >
                   Send Another
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className={labelClass}>Name</label>
-                    <input
-                      type="text"
-                      value={form.name}
-                      onChange={e => setField("name", e.target.value)}
-                      placeholder="Your Name"
-                      className={`${inputClass} border ${errors.name ? "border-red-500" : "border-(--border)"}`}
-                    />
-                    {errors.name && <p className={errorClass}>{errors.name}</p>}
-                  </div>
-                  <div>
-                    <label className={labelClass}>Email</label>
-                    <input
-                      type="email"
-                      value={form.email}
-                      onChange={e => setField("email", e.target.value)}
-                      placeholder="Your email"
-                      className={`${inputClass} border ${errors.email ? "border-red-500" : "border-(--border)"}`}
-                    />
-                    {errors.email && <p className={errorClass}>{errors.email}</p>}
-                  </div>
-                </div>
-
-                <div>
-                  <label className={labelClass}>Subject</label>
+              <form
+                ref={formRef}
+                onSubmit={handleSubmit}
+                className="flex flex-col gap-4"
+              >
+                <div className="grid md:grid-cols-2 gap-4">
                   <input
-                    type="text"
-                    value={form.subject}
-                    onChange={e => setField("subject", e.target.value)}
-                    placeholder="Project Inquiry"
-                    className={`${inputClass} border border-(--border)`}
+                    placeholder="Name"
+                    value={form.name}
+                    onChange={(e) => setField("name", e.target.value)}
+                    className="border p-3 rounded-lg"
+                  />
+                  <input
+                    placeholder="Email"
+                    value={form.email}
+                    onChange={(e) => setField("email", e.target.value)}
+                    className="border p-3 rounded-lg"
                   />
                 </div>
 
-                <div>
-                  <label className={labelClass}>Message</label>
-                  <textarea
-                    value={form.message}
-                    onChange={e => setField("message", e.target.value)}
-                    placeholder="Tell me about your project..."
-                    rows={5}
-                    className={`${inputClass} border resize-y ${errors.message ? "border-red-500" : "border-(--border)"}`}
-                  />
-                  {errors.message && <p className={errorClass}>{errors.message}</p>}
-                </div>
+                <input
+                  placeholder="Subject"
+                  value={form.subject}
+                  onChange={(e) => setField("subject", e.target.value)}
+                  className="border p-3 rounded-lg"
+                />
+
+                <textarea
+                  rows={5}
+                  placeholder="Message"
+                  value={form.message}
+                  onChange={(e) => setField("message", e.target.value)}
+                  className="border p-3 rounded-lg"
+                />
+
+                {emailError && (
+                  <p className="text-red-500 text-sm">{emailError}</p>
+                )}
 
                 <button
-                  type="submit"
                   disabled={loading}
-                  className={`inline-flex items-center justify-center gap-2 px-7 py-3.25 rounded-xl border-none text-sm font-semibold transition-all duration-200
-                    ${loading
-                      ? "bg-(--bg2) text-(--muted) cursor-not-allowed"
-                      : "bg-(--accent) text-[#0b0b10] cursor-pointer"
-                    }`}
+                  className="bg-(--accent) py-3 rounded-lg flex justify-center items-center gap-2"
                 >
-                  {loading ? "Sending..." : <><Send size={16} /> Send Message</>}
+                  {loading ? "Sending..." : <> <Send size={16}/> Send Message</>}
                 </button>
-
               </form>
             )}
           </div>
-
         </div>
       </div>
     </div>

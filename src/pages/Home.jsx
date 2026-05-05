@@ -96,7 +96,7 @@ export default function Home() {
 
             {/* RIGHT AVATAR */}
             <div className="relative flex justify-center md:justify-end">
-              <div className="w-70 h-65 md:w-80 md:h-80 lg:w-90 md:h-90 rounded-4xl bg-(--card) border border-(--border) overflow-hidden">
+              <div className="w-70 h-65 md:w-80 md:h-80 lg:w-90  rounded-4xl bg-(--card) border border-(--border) overflow-hidden">
                 <img
                   src={personal.avatar}
                   alt={personal.name}
