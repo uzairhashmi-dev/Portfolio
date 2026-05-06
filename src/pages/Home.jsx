@@ -80,11 +80,11 @@ export default function Home() {
                 >
                   View Projects <ArrowRight size={16} />
                 </Link>
-               <a
+                <a
                     href={personal.links.resume}
                     target="_blank"
                      rel="noreferrer"
-                    className="flex items-center gap-2 px-6 py-3 rounded-xl bg-(--card) border border-(--border) text-(--text) font-semibold text-sm"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-(--card) border border-(--border) text-(--text) font-semibold text-sm"
                   >
                     <Download size={16} /> View Resume
                </a>
