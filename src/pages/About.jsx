@@ -1,18 +1,83 @@
-import { MapPin, Mail, Phone, Download, Briefcase, GraduationCap } from "lucide-react";
+import { useState } from "react";
+import {
+  MapPin,
+  Mail,
+  Phone,
+  Download,
+  Briefcase,
+  GraduationCap,
+  X,
+  MessageCircle,
+} from "lucide-react";
 import { personal, experience } from "../data/data";
 
+const WHATSAPP_NUMBER = "923297563190";
+
 export default function About() {
+  const [showPhoneModal, setShowPhoneModal] = useState(false);
+
+  const whatsappUrl =
+    "https://wa.me/" +
+    WHATSAPP_NUMBER +
+    "?text=Hi%20Uzair%2C%20I%20found%20your%20portfolio!";
+
   const contactItems = [
     { icon: MapPin, label: "Location", value: personal.location, href: null },
     { icon: Mail, label: "Email", value: personal.email, href: "mailto:" + personal.email },
-    { icon: Phone, label: "Phone", value: personal.phone, href: "tel:" + personal.phone },
+    { icon: Phone, label: "Phone", value: personal.phone, href: null },
   ];
 
   return (
     <div className="pt-24 pb-24">
-      <div className="max-w-6xl mx-auto px-5">
+      {showPhoneModal && (
+        <div
+          onClick={() => setShowPhoneModal(false)}
+          className="fixed inset-0 bg-black/50 backdrop-blur flex items-center justify-center z-50 p-4"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="bg-(--card) border border-(--border) rounded-2xl p-6 w-full max-w-sm relative"
+          >
+            <button
+              onClick={() => setShowPhoneModal(false)}
+              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center border rounded-md"
+            >
+              <X size={16} />
+            </button>
 
-        {/* Heading */}
+            <h3 className="text-2xl font-bold mb-4">Get in Touch</h3>
+            <p className="text-sm text-(--muted) mb-6">
+              {personal.phone}
+            </p>
+
+            <div className="flex flex-col gap-3">
+              <a
+                href={"tel:" + personal.phone}
+                className="flex items-center gap-3 bg-(--accent) text-black px-4 py-3 rounded-xl font-semibold"
+              >
+                <Phone size={18} /> Call Now
+              </a>
+
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-3 bg-green-500 text-white px-4 py-3 rounded-xl font-semibold"
+              >
+                <MessageCircle size={18} /> WhatsApp
+              </a>
+
+              <button
+                onClick={() => setShowPhoneModal(false)}
+                className="border rounded-xl py-2 text-sm"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      <div className="max-w-6xl mx-auto px-5">
         <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-(--accent) font-['JetBrains_Mono'] mb-2">
           About Me
         </p>
@@ -26,19 +91,13 @@ export default function About() {
           humans using the product.
         </p>
 
-        {/* Grid */}
         <div className="grid md:grid-cols-[3fr_2fr] gap-10">
-
-          {/* LEFT */}
           <div className="flex flex-col gap-6">
-
-            {/* Bio */}
             <div className="bg-(--card) border border-(--border) rounded-[20px] p-8">
               <p className="text-base text-(--muted) leading-[1.85]">
                 {personal.bio}
               </p>
             </div>
-
             {/* Contact */}
             <div className="grid sm:grid-cols-2 gap-3.5">
               {contactItems.map((item) => (
@@ -54,8 +113,15 @@ export default function About() {
                     <p className="text-[10px] font-['JetBrains_Mono'] text-(--muted) font-semibold tracking-widest uppercase mb-1">
                       {item.label}
                     </p>
-
-                    {item.href ? (
+                    {/* 🔥 PHONE special handling */}
+                    {item.label === "Phone" ? (
+                      <button
+                        onClick={() => setShowPhoneModal(true)}
+                        className="text-[13px] text-(--text) text-left"
+                      >
+                        {item.value}
+                      </button>
+                    ) : item.href ? (
                       <a
                         href={item.href}
                         className="text-[13px] text-(--text) wrap-break-word no-underline"
@@ -83,11 +149,8 @@ export default function About() {
               </div>
             </div>
           </div>
-
           {/* RIGHT */}
           <div className="flex flex-col gap-5">
-
-            {/* Experience */}
             <div className="bg-(--card) border border-(--border) rounded-[20px] p-7">
               <div className="flex items-center gap-2.5 mb-6">
                 <div className="w-8 h-8 rounded-lg bg-(--bg2) border border-(--border) flex items-center justify-center text-(--accent)">
@@ -97,7 +160,6 @@ export default function About() {
                   Experience
                 </h3>
               </div>
-
               <div className="flex flex-col gap-5">
                 {experience.map((exp, i) => (
                   <div key={i} className="pl-4 border-l-2 border-(--border)">
@@ -119,7 +181,6 @@ export default function About() {
                 ))}
               </div>
             </div>
-
             {/* Education */}
             <div className="bg-(--card) border border-(--border) rounded-[20px] p-7">
               <div className="flex items-center gap-2.5 mb-6">
@@ -130,13 +191,12 @@ export default function About() {
                   Education
                 </h3>
               </div>
-
               <div className="pl-4 border-l-2 border-(--border)">
                 <p className="text-[11px] font-['JetBrains_Mono'] text-(--accent) font-semibold mb-1">
                   2018 — 2022
                 </p>
                 <h4 className="text-sm font-bold text-(--text)">
-                  B.com 
+                  B.com
                 </h4>
                 <p className="text-xs text-(--muted)">
                   University of Punjab, Lahore
@@ -145,7 +205,6 @@ export default function About() {
             </div>
 
           </div>
-
         </div>
       </div>
     </div>

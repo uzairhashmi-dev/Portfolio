@@ -45,14 +45,12 @@ export default function Home() {
                 Available for new opportunities
               </div>
 
-              {/* Name */}
               <h1 className="font-['Bebas_Neue'] text-[clamp(3.5rem,10vw,7rem)] leading-[0.95] text-(--text) mb-5">
                 {firstName}
                 <br />
                 <span className="text-(--accent)">{lastName}</span>
               </h1>
 
-              {/* Role animation */}
               <div className="h-10 mb-6 overflow-hidden">
                 <p
                   className={`font-['JetBrains_Mono'] text-sm md:text-base text-(--accent) transition-all duration-300 ${

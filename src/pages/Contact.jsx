@@ -107,7 +107,6 @@ export default function Contact() {
 
   return (
     <div className="py-20 px-4">
-      {/* MODAL */}
       {showPhoneModal && (
         <div
           onClick={() => setShowPhoneModal(false)}
@@ -157,7 +156,7 @@ export default function Contact() {
         </div>
       )}
 
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-276 mx-auto">
         <p className="text-xs tracking-widest text-(--accent) uppercase mb-2">
           Contact
         </p>
