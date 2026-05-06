@@ -3,7 +3,12 @@ import { ArrowRight, Download, MapPin, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import { personal, projects } from "../data/data";
 
-const roles = ["Frontend Developer", "React Specialist", "UI Craftsman", "Web Developer"];
+const roles = [
+  "Frontend Developer",
+  "React Specialist",
+  "UI Craftsman",
+  "Web Developer",
+];
 
 export default function Home() {
   const [roleIdx, setRoleIdx] = useState(0);
@@ -28,18 +33,17 @@ export default function Home() {
   return (
     <div>
       <section className="min-h-screen flex items-center relative overflow-hidden">
-
-        <div className="absolute inset-0 opacity-[0.03] pointer-events-none 
+        <div
+          className="absolute inset-0 opacity-[0.03] pointer-events-none 
           bg-[linear-gradient(var(--text)_1px,transparent_1px),linear-gradient(90deg,var(--text)_1px,transparent_1px)] 
-          bg-size-[60px_60px]" />
+          bg-size-[60px_60px]"
+        />
 
         <div className="absolute top-[20%] right-0 w-100 h-100 md:w-125 md:h-125 rounded-full bg-(--accent) opacity-[0.07] blur-[100px]" />
 
         <div className="max-w-6xl mx-auto px-5 py-20 w-full">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-
             <div>
-
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-(--card) border border-(--border) text-xs text-(--muted) mb-8 font-['JetBrains_Mono']">
                 <Sparkles size={12} className="text-(--accent)" />
                 Available for new opportunities
@@ -54,10 +58,14 @@ export default function Home() {
               <div className="h-10 mb-6 overflow-hidden">
                 <p
                   className={`font-['JetBrains_Mono'] text-sm md:text-base text-(--accent) transition-all duration-300 ${
-                    visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
+                    visible
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-2"
                   }`}
                 >
-                  {"< "}{roles[roleIdx]}{" />"}
+                  {"< "}
+                  {roles[roleIdx]}
+                  {" />"}
                 </p>
               </div>
 
@@ -73,23 +81,24 @@ export default function Home() {
               </div>
 
               {/* Buttons */}
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-3 relative z-10">
                 <Link
                   to="/projects"
-                  className="flex items-center gap-2 px-6 py-3 rounded-xl bg-(--accent) text-[#0b0b10] font-semibold text-sm"
+                  className="flex items-center gap-2 px-6 py-3 rounded-xl bg-(--accent) text-[#0b0b10] font-semibold text-sm cursor-pointer"
                 >
                   View Projects <ArrowRight size={16} />
                 </Link>
+
                 <a
-                    href={personal.links.resume}
-                    target="_blank"
-                     rel="noreferrer"
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-(--card) border border-(--border) text-(--text) font-semibold text-sm"
-                  >
-                    <Download size={16} /> View Resume
-               </a>
+                  href={personal.links.resume}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-(--card) border border-(--border) text-(--text) font-semibold text-sm cursor-pointer"
+                >
+                  <Download size={16} /> View Resume
+                </a>
               </div>
-           </div>
+            </div>
 
             {/* RIGHT AVATAR */}
             <div className="relative flex justify-center md:justify-end">
@@ -105,7 +114,6 @@ export default function Home() {
                 {new Date().getFullYear() - 2025}+ yrs exp
               </div>
             </div>
-
           </div>
         </div>
       </section>
@@ -113,7 +121,6 @@ export default function Home() {
       {/* FEATURED PROJECTS */}
       <section className="pb-24">
         <div className="max-w-6xl mx-auto px-5">
-
           <div className="flex flex-wrap justify-between items-end mb-10 gap-3">
             <div>
               <p className="text-[11px] font-semibold tracking-[0.18em] uppercase text-(--accent) font-['JetBrains_Mono'] mb-2">
@@ -124,7 +131,10 @@ export default function Home() {
               </h2>
             </div>
 
-            <Link to="/projects" className="flex items-center gap-1 text-sm text-(--accent)">
+            <Link
+              to="/projects"
+              className="flex items-center gap-1 text-sm text-(--accent)"
+            >
               View All <ArrowRight size={14} />
             </Link>
           </div>
@@ -134,7 +144,6 @@ export default function Home() {
               <FeaturedCard key={p.id} project={p} />
             ))}
           </div>
-
         </div>
       </section>
     </div>
@@ -154,9 +163,7 @@ function FeaturedCard({ project }) {
         </span>
       </div>
 
-      <h3 className="text-[17px] font-bold text-(--text)">
-        {project.title}
-      </h3>
+      <h3 className="text-[17px] font-bold text-(--text)">{project.title}</h3>
 
       <p className="text-sm text-(--muted) leading-[1.7] flex-1">
         {project.desc}
