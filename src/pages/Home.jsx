@@ -69,17 +69,14 @@ export default function Home() {
                 </p>
               </div>
 
-              {/* Tagline */}
               <p className="text-base text-(--muted) leading-[1.8] max-w-130 mb-6">
                 {personal.tagline}
               </p>
-
               {/* Location */}
               <div className="flex items-center gap-2 text-sm text-(--muted) mb-8">
                 <MapPin size={14} className="text-(--accent)" />
                 {personal.location}
               </div>
-
               {/* Buttons */}
               <div className="flex flex-wrap gap-3 relative z-10">
                 <Link
@@ -88,7 +85,6 @@ export default function Home() {
                 >
                   View Projects <ArrowRight size={16} />
                 </Link>
-
                 <a
                   href={personal.links.resume}
                   target="_blank"
@@ -99,7 +95,6 @@ export default function Home() {
                 </a>
               </div>
             </div>
-
             {/* RIGHT AVATAR */}
             <div className="relative flex justify-center md:justify-end">
               <div className="w-70 h-65 md:w-80 md:h-80 lg:w-90  rounded-4xl bg-(--card) border border-(--border) overflow-hidden">
@@ -117,7 +112,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* FEATURED PROJECTS */}
       <section className="pb-24">
         <div className="max-w-6xl mx-auto px-5">
@@ -130,7 +124,6 @@ export default function Home() {
                 Selected Projects
               </h2>
             </div>
-
             <Link
               to="/projects"
               className="flex items-center gap-1 text-sm text-(--accent)"

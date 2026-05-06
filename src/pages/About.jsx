@@ -135,7 +135,6 @@ export default function About() {
                   </div>
                 </div>
               ))}
-
               {/* Resume */}
               <div className="col-span-full">
                  <a

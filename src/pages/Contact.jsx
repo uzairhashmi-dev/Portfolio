@@ -168,7 +168,6 @@ export default function Contact() {
           Have a project or just want to say hi? My inbox is always open.
         </p>
 
-        {/* GRID */}
         <div className="grid lg:grid-cols-5 md:grid-cols-2 gap-10">
           {/* LEFT */}
           <div className="lg:col-span-2 flex flex-col gap-4">
@@ -182,7 +181,6 @@ export default function Contact() {
                 <p>{personal.email}</p>
               </div>
             </a>
-
             {/* Phone */}
             <button
               onClick={() => setShowPhoneModal(true)}
@@ -202,7 +200,6 @@ export default function Contact() {
                 <p>{personal.location}</p>
               </div>
             </div>
-
             {/* WhatsApp */}
             <a
               href={whatsappUrl}

@@ -18,7 +18,6 @@ export default function Skills() {
         <p className="text-base text-(--muted) mb-16 max-w-120">
           Technologies and tools I use to bring ideas to life.
         </p>
-
         <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-6 mb-6">
           {Object.entries(skills).map(([category, items]) => (
             <div key={category} className="bg-(--card) border border-(--border) rounded-[20px] p-8">
@@ -57,7 +56,6 @@ export default function Skills() {
             </div>
           ))}
         </div>
-
         {/* Other Tools */}
         <div className="bg-(--card) border border-(--border) rounded-[20px] p-8">
           <h3 className="font-['Bebas_Neue'] text-[1.6rem] text-(--text) tracking-[0.04em] mb-5">

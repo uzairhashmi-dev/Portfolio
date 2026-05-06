@@ -72,7 +72,6 @@ export default function Projects() {
     </div>
   );
 }
-
 function ProjectCard({ project }) {
   return (
     <div className="bg-(--card) border border-(--border) rounded-[20px] p-6 flex flex-col">
