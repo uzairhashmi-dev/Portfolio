@@ -12,7 +12,6 @@ import {
 import { personal, experience } from "../data/data";
 
 const WHATSAPP_NUMBER = "923297563190";
-
 export default function About() {
   const [showPhoneModal, setShowPhoneModal] = useState(false);
 
@@ -139,13 +138,14 @@ export default function About() {
 
               {/* Resume */}
               <div className="col-span-full">
-                <a
-                  href={personal.links.resume}
-                  download
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-(--accent) text-[#0b0b10] text-sm font-semibold"
-                >
-                  <Download size={15} /> Download Resume
-                </a>
+                 <a
+                    href={personal.links.resume}
+                    target="_blank"
+                     rel="noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-(--accent) text-[#0b0b10] text-sm font-semibold"
+                  >
+                    <Download size={16} /> View Resume
+               </a>
               </div>
             </div>
           </div>
@@ -196,7 +196,7 @@ export default function About() {
                   2018 — 2022
                 </p>
                 <h4 className="text-sm font-bold text-(--text)">
-                  B.com
+                  Bs 
                 </h4>
                 <p className="text-xs text-(--muted)">
                   University of Punjab, Lahore

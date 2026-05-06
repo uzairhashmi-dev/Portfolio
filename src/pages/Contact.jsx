@@ -63,13 +63,14 @@ export default function Contact() {
   setEmailError("");
   setLoading(true);
 
-    const params = {
-      from_name: form.name,
-      from_email: form.email,
-      subject: form.subject || "No Subject",
-      message: form.message,
-      reply_to: form.email,
-    };
+  const params = {
+  from_name:  form.name,
+  from_email: form.email,
+  to_email:   form.email,     
+  subject:    form.subject || "No Subject",
+  message:    form.message,
+  reply_to:   form.email,
+};
 
     try {
       await emailjs.send(

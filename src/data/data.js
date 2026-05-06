@@ -10,7 +10,7 @@ export const personal = {
   links: {
     github: "https://github.com/uzairhashmi-dev",
     linkedin: "www.linkedin.com/in/uzair-hashmi-2794a2390",
-    resume: "#",
+    resume: "resume.pdf",
   },
 };
 
