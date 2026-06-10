@@ -20,7 +20,7 @@ export default function About() {
     WHATSAPP_NUMBER +
     "?text=Hi%20Uzair%2C%20I%20found%20your%20portfolio!";
 
-  const contactItems = [
+  const contactItems = [ 
     { icon: MapPin, label: "Location", value: personal.location, href: null },
     { icon: Mail, label: "Email", value: personal.email, href: "mailto:" + personal.email },
     { icon: Phone, label: "Phone", value: personal.phone, href: null },

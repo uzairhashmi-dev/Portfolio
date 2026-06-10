@@ -6,6 +6,7 @@ import { personal, projects } from "../data/data";
 const roles = [
   "Frontend Developer",
   "React Specialist",
+  "Next Specialist",
   "UI Craftsman",
   "Web Developer",
 ];
