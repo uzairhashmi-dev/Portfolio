@@ -51,7 +51,7 @@ export const projects = [
     desc: "A modern Github file explorr built with Next & Typescript, featuring a sleek reposteries showcase, file explore file & code functionality, and smooth UI — inspired by this project.",
     tags: ["Next.js", "Zustand", "Tailwind", "TypeScript"],
     github: "https://github.com/uzairhashmi-dev/Github-File-Explorer",
-    live: "https://vercel.com/uzairhashmi-devs-projects/github-file-explorer",
+    live: "https://github-file-explorer.vercel.app/",
     featured: true,
     year: "2026",
   },
