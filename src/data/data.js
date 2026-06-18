@@ -30,10 +30,10 @@ export const projects = [
     title: "ERP-Feedmil",
     desc: "Full ERP feed-mill system, filters, and Stripe checkout UI. Fully responsive with dark mode support.",
     tags: ["React", "Tailwind", "JavaScript"],
-    github: "https://github.com/uzairhashmi-dev/feedmill-pro.git",
-    live: "https://feedmill-pro.vercel.app/",
+    github: "https://github.com/iUbaidRao12/Feedmil-Frontend",
+    live: "https://feedmil-frontend.vercel.app/login",
     featured: true,
-    year: "2025",
+    year: "2026",
   },
   {
     id: 3,
